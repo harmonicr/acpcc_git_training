@@ -1,0 +1,190 @@
+---
+title: "Cervical Cancer"
+description: "National Cervical Screening Program in Victoria: coverage, screening numbers, self-collection and time to colposcopy."
+---
+
+```{r}
+source("R/setup.R")
+```
+
+::: page-hero
+[National Cervical Screening Program]{.page-kicker}
+
+# Cervical Cancer
+
+The National Cervical Screening Program invites women and people with a cervix aged 25 to 74 to have a Cervical Screening Test every five years. Since July 2022 everyone eligible can choose to collect their own sample. This page shows coverage, the number of tests, the uptake of self-collection and the time to colposcopy after a higher-risk result.
+:::
+
+::: {.panel-tabset .focus-areas}
+
+## Coverage
+
+:::: focus-area
+::: focus-text
+::: key-insight
+[Key insight]{.insight-tag}
+
+[`r key_figure("cervical_coverage")`]{.insight-value}
+
+coverage rate over the 5-year reporting period among eligible people aged 25-74 in `r latest_period("cervical_coverage")`.
+
+```{r}
+sparkline("cervical_coverage")
+```
+:::
+
+```{r}
+insight_cards("cervical_coverage")
+```
+
+### Interpretation
+
+Coverage is lowest among people aged 25-29 and those in their 70s, and highest in the middle age groups. Regional LGAs tend to sit below the Victorian rate.
+
+::: {.callout-note collapse="true"}
+## Technical notes
+
+1. **Coverage** is the number of people who had at least one Cervical Screening Test in the 5-year period divided by the estimated eligible population aged 25-74.
+2. Five-year periods match the recommended screening interval.
+3. Rates are not age-standardised.
+4. **All values on this page are synthetic.** They were generated for a training exercise and must not be used for any other purpose.
+:::
+
+`r download_link("cervical_coverage")`
+:::
+
+::: focus-chart
+```{r}
+chart_panel("cervical_coverage")
+```
+:::
+::::
+
+## Screening numbers
+
+:::: focus-area
+::: focus-text
+::: key-insight
+[Key insight]{.insight-tag}
+
+[`r key_figure("cervical_screening")`]{.insight-value}
+
+cervical screening tests among eligible people aged 25-74 were performed in `r latest_period("cervical_screening")`.
+
+```{r}
+sparkline("cervical_screening")
+```
+:::
+
+```{r}
+insight_cards("cervical_screening")
+```
+
+### Interpretation
+
+Test numbers fell in 2020 and 2021 and have recovered since. Because the screening interval is five years, annual numbers also move with the cycle of people falling due.
+
+::: {.callout-note collapse="true"}
+## Technical notes
+
+1. **Screening numbers** count Cervical Screening Tests (clinician-collected and self-collected) performed in the calendar year for people aged 25-74.
+2. Follow-up and diagnostic tests are excluded.
+3. **All values on this page are synthetic.**
+:::
+
+`r download_link("cervical_screening")`
+:::
+
+::: focus-chart
+```{r}
+chart_panel("cervical_screening")
+```
+:::
+::::
+
+## Self-collection
+
+:::: focus-area
+::: focus-text
+::: key-insight
+[Key insight]{.insight-tag}
+
+[`r key_figure("cervical_selfcollection")`]{.insight-value}
+
+of cervical screening tests among eligible people aged 25-74 were self-collected in `r latest_period("cervical_selfcollection")`.
+
+```{r}
+sparkline("cervical_selfcollection")
+```
+:::
+
+```{r}
+insight_cards("cervical_selfcollection")
+```
+
+### Interpretation
+
+Self-collection was rare until July 2022, when it became available to everyone eligible for screening. Since then it has grown quickly and now accounts for about a third of all tests. Uptake varies considerably between LGAs; the Variation view shows which areas differ from the Victorian share by more than chance.
+
+::: {.callout-note collapse="true"}
+## Technical notes
+
+1. **Self-collection rate** is the number of Cervical Screening Tests where the person collected their own vaginal sample, divided by all Cervical Screening Tests in the calendar year.
+2. The downloadable table includes the number of self-collected tests as the numerator.
+3. Data start in 2018, after the renewed program began in December 2017.
+4. **All values on this page are synthetic.**
+:::
+
+`r download_link("cervical_selfcollection")`
+:::
+
+::: focus-chart
+```{r}
+chart_panel("cervical_selfcollection")
+```
+:::
+::::
+
+## Time to colposcopy
+
+:::: focus-area
+::: focus-text
+::: key-insight
+[Key insight]{.insight-tag}
+
+[`r key_figure("cervical_colposcopy")`]{.insight-value}
+
+of participants proceeded to colposcopy within 3 months following a screening test result with a higher risk classification in `r latest_period("cervical_colposcopy")`.
+
+```{r}
+sparkline("cervical_colposcopy")
+```
+:::
+
+```{r}
+insight_cards("cervical_colposcopy")
+```
+
+### Interpretation
+
+Timeliness dipped during 2020 and 2021 and has improved gradually since. Many LGAs have small numbers of higher-risk results each year, so their rates move around a lot. The funnel plot in the Variation view separates genuine differences from that noise.
+
+::: {.callout-note collapse="true"}
+## Technical notes
+
+1. **Time to colposcopy** is the proportion of people with a higher-risk screening result who had a colposcopy within 3 months of the result.
+2. The denominator is people with a higher-risk result in the calendar year.
+3. **All values on this page are synthetic.**
+:::
+
+`r download_link("cervical_colposcopy")`
+:::
+
+::: focus-chart
+```{r}
+chart_panel("cervical_colposcopy")
+```
+:::
+::::
+
+:::

@@ -12,6 +12,7 @@ SELECT
   i.focus_area,
   i.measure,
   i.headline,
+  i.variation,
   s.period,
   sum(s.numerator)   AS numerator,
   sum(s.denominator) AS denominator,

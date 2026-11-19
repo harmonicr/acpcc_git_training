@@ -1,0 +1,45 @@
+---
+title: "Instructions"
+description: "How to use the charts in this report."
+---
+
+::: page-hero
+[Using this report]{.page-kicker}
+
+# Instructions
+
+Each program page is organised into **focus areas**. Select a focus area to see its key insight, interpretation, technical notes, a downloadable data table and an interactive chart panel.
+:::
+
+::: {.column-body}
+## The chart panel
+
+The chart panel has four views. Select a view with the buttons along the top of the panel.
+
+| View | What it shows | How to use it |
+|---|---|---|
+| **Compare** | The latest result for each age group, sex, Local Public Health Unit (LPHU) or Primary Health Network (PHN) | Choose a breakdown under *Compare by*. The dashed line is the Victorian result. Where results are available by sex, select *Female* or *Male* in the legend to add them. |
+| **Map** | Results by local government area (LGA), PHN or LPHU | Choose an area type. *Melbourne* zooms in on the metropolitan LGAs. Scroll to zoom, drag to pan and hover over an area to see its value. |
+| **Trend** | Results over time for Victoria, with each PHN available from the legend | Select a PHN in the legend to add it. The shaded band marks the main COVID-19 disruption. |
+| **Variation** | How much places differ from each other | For rates, a funnel plot of each LGA against its eligible population: points outside the shaded bands differ from the Victorian rate by more than chance. For counts, the change in each LPHU since 2019. |
+
+## Time periods
+
+Compare and Map views include a timeline under the chart. Select a period to jump to it, or press play to step through every period in turn. The chart starts on the most recent period.
+
+## Downloading data
+
+Each focus area has a link to an Excel data table with the numerator, denominator and rate for every period, LGA, age group and sex. Every chart also has a download button in its top-right corner to save it as an image.
+
+## Geography
+
+| Level | Areas | Notes |
+|---|---|---|
+| Local government area (LGA) | 79 | ABS ASGS 2024 boundaries |
+| Primary Health Network (PHN) | 6 | Each LGA is assigned to one PHN |
+| Local Public Health Unit (LPHU) | 9 | Membership from the Victorian Department of Health |
+
+::: {.callout-warning}
+All figures on this site are synthetic. The geography is real; the values are not.
+:::
+:::

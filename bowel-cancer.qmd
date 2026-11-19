@@ -1,0 +1,151 @@
+---
+title: "Bowel Cancer"
+description: "National Bowel Cancer Screening Program in Victoria: participation, screening numbers and time to colonoscopy."
+---
+
+```{r}
+source("R/setup.R")
+```
+
+::: page-hero
+[National Bowel Cancer Screening Program]{.page-kicker}
+
+# Bowel Cancer
+
+The National Bowel Cancer Screening Program (NBCSP) mails a free immunochemical faecal occult blood test (iFOBT) kit every two years to eligible people aged 50 to 74. This page shows how many people took part, how many kits were completed, and how quickly people with a positive result went on to have a colonoscopy.
+:::
+
+::: {.panel-tabset .focus-areas}
+
+## Participation
+
+:::: focus-area
+::: focus-text
+::: key-insight
+[Key insight]{.insight-tag}
+
+[`r key_figure("bowel_participation")`]{.insight-value}
+
+2-year participation rate amongst eligible participants aged 50-74 in `r latest_period("bowel_participation")`.
+
+```{r}
+sparkline("bowel_participation")
+```
+:::
+
+```{r}
+insight_cards("bowel_participation")
+```
+
+### Interpretation
+
+Participation rises steadily with age: people in their early 70s are more likely to return a kit than people in their early 50s. Women participate at a higher rate than men in every age group. Regional LGAs tend to sit above the Victorian rate.
+
+::: {.callout-note collapse="true"}
+## Technical notes
+
+1. **Participation rate** is the number of people who returned a completed screening test within the 2-year period, divided by the number of people invited in that period.
+2. Eligible people are those aged 50-74 at the time of invitation.
+3. Age is age at invitation. Location is the residential address at invitation.
+4. Rates are not age-standardised.
+5. COVID-19 affected screening services and health-seeking behaviour in 2020-2022.
+6. **All values on this page are synthetic.** They were generated for a training exercise and must not be used for any other purpose.
+:::
+
+`r download_link("bowel_participation")`
+:::
+
+::: focus-chart
+```{r}
+chart_panel("bowel_participation")
+```
+:::
+::::
+
+## Screening numbers
+
+:::: focus-area
+::: focus-text
+::: key-insight
+[Key insight]{.insight-tag}
+
+[`r key_figure("bowel_screening")`]{.insight-value}
+
+eligible people aged 50-74 completed a bowel screening test kit in `r latest_period("bowel_screening")`.
+
+```{r}
+sparkline("bowel_screening")
+```
+:::
+
+```{r}
+insight_cards("bowel_screening")
+```
+
+### Interpretation
+
+The number of completed kits grows each year, in line with population growth in the eligible age range. Unlike breast and cervical screening, bowel screening is done at home, so kit returns held up during the COVID-19 lockdowns.
+
+::: {.callout-note collapse="true"}
+## Technical notes
+
+1. **Screening numbers** count completed screening tests analysed by the program's pathology laboratory in the calendar year.
+2. A person can be counted more than once if they completed more than one kit in the year.
+3. Counts are for people aged 50-74 at the time of the test.
+4. **All values on this page are synthetic.**
+:::
+
+`r download_link("bowel_screening")`
+:::
+
+::: focus-chart
+```{r}
+chart_panel("bowel_screening")
+```
+:::
+::::
+
+## Time to colonoscopy
+
+:::: focus-area
+::: focus-text
+::: key-insight
+[Key insight]{.insight-tag}
+
+[`r key_figure("bowel_colonoscopy")`]{.insight-value}
+
+of participants attended for colonoscopy within 4 months of referral in `r latest_period("bowel_colonoscopy")`.
+
+```{r}
+sparkline("bowel_colonoscopy")
+```
+:::
+
+```{r}
+insight_cards("bowel_colonoscopy")
+```
+
+### Interpretation
+
+A colonoscopy within 4 months of a positive screening result is considered timely under the clinical guidelines. Timeliness fell during 2020 and 2021, when elective procedures were restricted, and has since recovered.
+
+::: {.callout-note collapse="true"}
+## Technical notes
+
+1. **Time to colonoscopy** is the proportion of people with a positive screening result who had a colonoscopy within 4 months (120 days) of the result.
+2. The denominator is people with a positive result who had a colonoscopy recorded.
+3. Small LGAs can show large swings from year to year because their denominators are small. See the Variation view.
+4. **All values on this page are synthetic.**
+:::
+
+`r download_link("bowel_colonoscopy")`
+:::
+
+::: focus-chart
+```{r}
+chart_panel("bowel_colonoscopy")
+```
+:::
+::::
+
+:::

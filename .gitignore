@@ -21,6 +21,7 @@
 /.quarto/
 /_site/
 *_files/
+*.quarto_ipynb
 *.html
 *.pdf
 !assets/**/*.html
@@ -29,7 +30,8 @@
 # The database is regenerated from data-raw/make-synthetic.R.
 data/*.duckdb
 data/*.duckdb.wal
-data/downloads/
+# Excel downloads are written during render.
+/downloads/
 # Exercise 4 adds a rule for ad hoc extracts here.
 
 # --- OS clutter -------------------------------------------------------------

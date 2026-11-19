@@ -1,0 +1,26 @@
+---
+title: "Foreword"
+description: "Foreword to the training demo report."
+---
+
+::: page-hero
+[Foreword]{.page-kicker}
+
+# Foreword
+:::
+
+::: {.column-body}
+Population cancer screening is one of the most effective ways to find cancer early, when treatment is most likely to succeed. Victoria's three screening programs, for bowel, breast and cervical cancer, reach millions of people every year.
+
+This report brings together the latest program data to show how many people take part, how that changes with age, sex and where people live, and how quickly people with an abnormal result move on to the next step of care. Looking at the data this way helps health services, primary care and community organisations decide where to focus their effort.
+
+Three themes stand out in this edition:
+
+- **Recovery after COVID-19.** Breast and cervical screening numbers fell sharply in 2020 and 2021 and have since recovered. Bowel screening, which people do at home, held up throughout.
+- **Self-collection.** Since July 2022, anyone eligible for cervical screening can collect their own sample. It now accounts for around a third of all cervical screening tests.
+- **Variation between places.** Participation differs widely between local government areas. The new Variation view on each page shows which differences are larger than chance alone would explain.
+
+::: {.callout-warning}
+This foreword is written for a training exercise. The report it introduces uses synthetic data only.
+:::
+:::

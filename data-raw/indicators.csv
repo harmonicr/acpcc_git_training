@@ -1,10 +1,10 @@
-indicator_id,sort_order,program,focus_area,measure,period_type,age_min,age_max,sexes,method,parent_id,base_rate,male_effect,trend,covid,referral_rate,headline
-bowel_screening,2,bowel,Screening numbers,count,year,50,70,All,population,,0.215,-0.12,0.010,0.04,,eligible people aged 50-74 completed a bowel screening test kit
-bowel_participation,1,bowel,Participation,rate,two_year,50,70,All,population,,0.43,-0.15,0.012,0.03,,2-year participation rate amongst eligible participants aged 50-74
-bowel_colonoscopy,3,bowel,Time to colonoscopy,rate,year,50,70,All,follow_up,bowel_screening,0.77,0,0.010,-0.45,0.065,of participants attended for colonoscopy within 4 months of referral
-breast_screening,5,breast,Screening numbers,count,year,50,70,Female,population,,0.26,0,0.008,-0.50,,eligible women aged 50-74 had a breast screen
-breast_participation,4,breast,Participation,rate,two_year,50,70,Female,population,,0.53,0,0.000,-0.45,,of eligible women aged 50-74 participated in the breast screening program
-cervical_screening,7,cervical,Screening numbers,count,year,25,70,Female,population,,0.19,0,-0.005,-0.30,,cervical screening tests among eligible people aged 25-74
-cervical_coverage,6,cervical,Coverage,rate,five_year,25,70,Female,population,,0.735,0,0.000,-0.10,,coverage rate over the 5-year reporting period among eligible people aged 25-74
-cervical_selfcollection,8,cervical,Self-collection,count,year,25,70,Female,self_collect,cervical_screening,,,,,,HPV self-collected tests among eligible people aged 25-74
-cervical_colposcopy,9,cervical,Time to colposcopy,rate,year,25,70,Female,follow_up,cervical_screening,0.58,0,0.008,-0.30,0.03,of participants proceeded to colposcopy within 3 months of a higher-risk result
+indicator_id,sort_order,program,focus_area,measure,period_type,age_min,age_max,sexes,method,parent_id,base_rate,male_effect,trend,covid,referral_rate,headline,variation
+bowel_screening,2,bowel,Screening numbers,count,year,50,70,All,population,,0.215,-0.12,0.010,0.04,,eligible people aged 50-74 completed a bowel screening test kit,dumbbell
+bowel_participation,1,bowel,Participation,rate,two_year,50,70,All,population,,0.43,-0.15,0.012,0.03,,2-year participation rate amongst eligible participants aged 50-74,funnel
+bowel_colonoscopy,3,bowel,Time to colonoscopy,rate,year,50,70,All,follow_up,bowel_screening,0.77,0,0.010,-0.45,0.065,of participants attended for colonoscopy within 4 months of referral,funnel
+breast_screening,5,breast,Screening numbers,count,year,50,70,Female,population,,0.26,0,0.008,-0.50,,eligible women aged 50-74 had a breast screen,dumbbell
+breast_participation,4,breast,Participation,rate,two_year,50,70,Female,population,,0.53,0,0.000,-0.45,,of eligible women aged 50-74 participated in the breast screening program,funnel
+cervical_screening,7,cervical,Screening numbers,count,year,25,70,Female,population,,0.19,0,-0.005,-0.30,,cervical screening tests among eligible people aged 25-74,dumbbell
+cervical_coverage,6,cervical,Coverage,rate,five_year,25,70,Female,population,,0.735,0,0.000,-0.10,,coverage rate over the 5-year reporting period among eligible people aged 25-74,funnel
+cervical_selfcollection,8,cervical,Self-collection,rate,year,25,70,Female,self_collect,cervical_screening,,,,,,of cervical screening tests among eligible people aged 25-74 were self-collected,funnel
+cervical_colposcopy,9,cervical,Time to colposcopy,rate,year,25,70,Female,follow_up,cervical_screening,0.58,0,0.008,-0.30,0.03,of participants proceeded to colposcopy within 3 months of a higher-risk result,funnel

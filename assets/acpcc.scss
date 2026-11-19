@@ -1,0 +1,345 @@
+/*-- scss:defaults --*/
+
+// Palette taken from report.acpcc.org.au. Keep in step with R/theme.R.
+$ink:         #060709;
+$slate-900:   #2E3438;
+$slate-800:   #454E54;
+$slate-700:   #5B6770;
+$slate-600:   #73818C;
+$slate-500:   #8F9AA3;
+$grey-200:    #E3E6E8;
+$grey-100:    #F4F6F7;
+$blue:        #00A8E0;
+$blue-dark:   #00698C;
+$blue-light:  #76C6EC;
+$blue-pale:   #E0F7FF;
+$yellow:      #FFD457;
+$yellow-dark: #FFC824;
+$cream:       #FFFBF0;
+
+@import url("https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600;700&family=Barlow+Semi+Condensed:wght@500;600;700&display=swap");
+
+$font-family-sans-serif: "Barlow", system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+$headings-font-family: "Barlow Semi Condensed", $font-family-sans-serif;
+$headings-font-weight: 700;
+$headings-color: $ink;
+$font-size-root: 17px;
+
+$body-color: $slate-900;
+$link-color: $blue-dark;
+$primary: $blue;
+$secondary: $slate-800;
+$border-radius: 0.5rem;
+$border-radius-lg: 0.75rem;
+
+$sidebar-bg: $grey-100;
+$sidebar-fg: $slate-800;
+$sidebar-hl: $blue-dark;
+$footer-bg: $slate-900;
+$footer-fg: #ffffff;
+
+/*-- scss:rules --*/
+
+// --- Banners -----------------------------------------------------------------
+
+.synthetic-banner {
+  position: sticky;
+  top: 0;
+  z-index: 1030;
+  background: $yellow;
+  color: $ink;
+  font-size: 0.85rem;
+  padding: 0.4rem 1rem;
+  text-align: center;
+  border-bottom: 1px solid $yellow-dark;
+  .bi { margin-right: 0.35rem; }
+}
+
+.mobile-notice {
+  display: none;
+  background: $slate-900;
+  color: #fff;
+  font-size: 0.85rem;
+  padding: 0.5rem 2.5rem 0.5rem 1rem;
+  position: relative;
+  .mobile-notice-close {
+    position: absolute; right: 0.5rem; top: 0.3rem;
+    border: 0; background: none; color: #fff;
+  }
+  @media (max-width: 767.98px) { display: block; }
+}
+
+// --- Sidebar -----------------------------------------------------------------
+
+#quarto-sidebar {
+  border-right: 1px solid $grey-200;
+  .sidebar-logo { max-width: 210px; padding-bottom: 0.5rem; }
+  .sidebar-title { display: none; }
+  .sidebar-item .sidebar-link {
+    font-family: $headings-font-family;
+    font-weight: 600;
+    font-size: 1.05rem;
+    padding: 0.45rem 0.75rem;
+    border-left: 3px solid transparent;
+    border-radius: 0;
+    color: $slate-800;
+    &:hover { color: $ink; background: rgba($blue, 0.06); }
+    &.active { color: $ink; border-left-color: $blue; background: rgba($blue, 0.1); }
+  }
+  .sidebar-tools-main a { color: $slate-700; }
+}
+
+// --- Page header ---------------------------------------------------------------
+
+.page-hero {
+  background: linear-gradient(120deg, $blue-pale 0%, #ffffff 70%);
+  border-radius: $border-radius-lg;
+  padding: 2.25rem 2.5rem;
+  margin: 1rem 0 2rem;
+  border: 1px solid rgba($blue, 0.15);
+  .page-kicker {
+    font-family: $headings-font-family;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    font-weight: 600;
+    font-size: 0.85rem;
+    color: $blue-dark;
+  }
+  h1 { font-size: 2.6rem; margin: 0.25rem 0 0.75rem; }
+  p { max-width: 62rem; font-size: 1.08rem; margin-bottom: 0; }
+}
+
+// --- Focus area tabs -------------------------------------------------------------
+
+.panel-tabset.focus-areas {
+  &::before {
+    content: "Select a focus area";
+    display: block;
+    font-family: $headings-font-family;
+    font-weight: 600;
+    color: $slate-700;
+    margin-bottom: 0.5rem;
+  }
+  > .nav-tabs {
+    border: 0;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+    .nav-link {
+      border: 2px solid $grey-200;
+      border-radius: 999px;
+      color: $slate-800;
+      font-family: $headings-font-family;
+      font-weight: 600;
+      font-size: 1.05rem;
+      padding: 0.45rem 1.2rem;
+      background: #fff;
+      &:hover { border-color: $blue-light; }
+      &.active { background: $ink; color: #fff; border-color: $ink; }
+    }
+  }
+  > .tab-content {
+    border: 0;
+    padding: 1.5rem 0 0;
+  }
+}
+
+// --- Focus area layout -----------------------------------------------------------
+
+.focus-area {
+  display: grid;
+  grid-template-columns: minmax(0, 5fr) minmax(0, 8fr);
+  gap: 2.5rem;
+  align-items: start;
+  @media (max-width: 1199.98px) { grid-template-columns: 1fr; }
+  h3 { font-size: 1.35rem; margin-top: 1.75rem; }
+}
+
+.key-insight {
+  background: $ink;
+  color: #fff;
+  border-radius: $border-radius-lg;
+  padding: 1.5rem 1.75rem 1rem;
+  p { color: rgba(#fff, 0.88); margin-bottom: 0.5rem; }
+  .insight-tag {
+    display: inline-block;
+    background: $yellow;
+    color: $ink;
+    border-radius: 999px;
+    padding: 0.1rem 0.75rem;
+    font-size: 0.8rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+  .insight-value {
+    display: block;
+    font-family: $headings-font-family;
+    font-size: 3.6rem;
+    font-weight: 700;
+    line-height: 1.05;
+    color: $blue-light;
+    margin: 0.5rem 0 0.25rem;
+  }
+  .html-widget { margin: 0 -0.5rem; }
+}
+
+.mini-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(9.5rem, 1fr));
+  gap: 0.75rem;
+  margin: 1rem 0 0.5rem;
+}
+.mini-card {
+  border: 1px solid $grey-200;
+  border-radius: $border-radius;
+  padding: 0.75rem 0.9rem;
+  background: #fff;
+  .mini-card-label { font-size: 0.8rem; color: $slate-600; text-transform: uppercase; letter-spacing: 0.04em; }
+  .mini-card-value { font-family: $headings-font-family; font-size: 1.5rem; font-weight: 700; color: $ink; }
+  .mini-card-note { font-size: 0.85rem; color: $slate-700; }
+}
+
+.callout.callout-style-default { border-left-color: $slate-600; }
+.callout .callout-title-container { font-family: $headings-font-family; font-weight: 600; }
+
+.download-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  margin-top: 1rem;
+  padding: 0.65rem 1.1rem;
+  border: 2px solid $ink;
+  border-radius: 999px;
+  color: $ink;
+  font-weight: 600;
+  text-decoration: none;
+  transition: background 0.15s;
+  &:hover { background: $yellow; border-color: $yellow-dark; color: $ink; }
+}
+
+// --- Chart panel -------------------------------------------------------------------
+
+.chart-panel {
+  border: 1px solid $grey-200;
+  border-radius: $border-radius-lg;
+  padding: 1rem 1.25rem 1.25rem;
+  background: #fff;
+  box-shadow: 0 6px 24px rgba($ink, 0.05);
+}
+
+.chart-pills {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.4rem;
+  margin-bottom: 0.75rem;
+  .pill-label { font-size: 0.85rem; color: $slate-600; margin-right: 0.35rem; }
+  .chart-pill {
+    border: 1px solid $grey-200;
+    background: #fff;
+    color: $slate-800;
+    border-radius: 999px;
+    padding: 0.3rem 0.95rem;
+    font-weight: 600;
+    font-size: 0.92rem;
+    .bi { margin-right: 0.35rem; }
+    &:hover { border-color: $blue-light; }
+    &.active { background: $blue; border-color: $blue; color: #fff; }
+  }
+}
+.chart-pills-main {
+  border-bottom: 1px solid $grey-200;
+  padding-bottom: 0.75rem;
+  .chart-pill { font-size: 1rem; padding: 0.4rem 1.1rem; }
+  .chart-pill.active { background: $ink; border-color: $ink; }
+}
+.chart-pills-sub .chart-pill { font-size: 0.85rem; padding: 0.2rem 0.8rem; }
+.chart-hint { font-size: 0.85rem; color: $slate-600; margin: 0.25rem 0 0.5rem; }
+
+// --- Summary page --------------------------------------------------------------------
+
+.key-figures {
+  margin: 2rem 0;
+  .key-figures-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+    h2 { margin: 0; border: 0; }
+  }
+  .key-figures-controls { display: flex; align-items: center; gap: 0.5rem; }
+  .key-figures-count { color: $slate-600; font-size: 0.9rem; margin-right: 0.5rem; }
+  .kf-btn {
+    border: 2px solid $ink;
+    background: #fff;
+    border-radius: 999px;
+    padding: 0.3rem 0.8rem;
+    font-weight: 600;
+    &:hover { background: $yellow; border-color: $yellow-dark; }
+  }
+  .kf-btn-next { background: $ink; color: #fff; &:hover { color: $ink; } }
+  .carousel { margin-top: 1rem; }
+}
+
+.insight-slide {
+  background: $ink;
+  background-image: radial-gradient(circle at 85% 20%, rgba($blue, 0.35) 0, transparent 45%);
+  color: #fff;
+  border-radius: $border-radius-lg;
+  padding: 2.5rem 3rem;
+  min-height: 17rem;
+  .insight-slide-program { color: $yellow; font-weight: 600; letter-spacing: 0.03em; .bi { margin-right: 0.4rem; } }
+  .insight-slide-value {
+    font-family: $headings-font-family;
+    font-size: 5rem;
+    font-weight: 700;
+    line-height: 1.1;
+    color: $blue-light;
+  }
+  .insight-slide-text { font-size: 1.25rem; max-width: 46rem; color: rgba(#fff, 0.9); }
+  .insight-slide-link {
+    display: inline-block;
+    margin-top: 1.25rem;
+    color: #fff;
+    font-weight: 600;
+    text-decoration: none;
+    border-bottom: 2px solid $yellow;
+    .bi { margin-left: 0.35rem; }
+  }
+}
+
+.program-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr));
+  gap: 1.25rem;
+  margin: 1rem 0 2rem;
+}
+.program-card {
+  display: block;
+  border: 1px solid $grey-200;
+  border-radius: $border-radius-lg;
+  padding: 1.5rem;
+  color: $slate-900;
+  text-decoration: none;
+  background: #fff;
+  transition: transform 0.15s, box-shadow 0.15s, border-color 0.15s;
+  &:hover { transform: translateY(-3px); box-shadow: 0 10px 30px rgba($ink, 0.08); border-color: $blue-light; color: $slate-900; }
+  .program-card-icon { font-size: 2rem; color: $blue; }
+  h3 { margin: 0.75rem 0 0.5rem; }
+  .program-card-link { font-weight: 600; color: $blue-dark; }
+}
+
+// --- Footer ------------------------------------------------------------------------
+
+.nav-footer {
+  font-size: 0.85rem;
+  a { color: $blue-light; }
+}
+
+// Each page draws its own hero, so hide Quarto's default title block.
+#title-block-header { display: none; }
+
+// Quarto styles every .tab-content inside a tabset; the chart panel's own
+// pills don't need the border.
+.chart-panel .tab-content { border: 0; padding: 0; }

@@ -1,0 +1,27 @@
+// Small behaviours the report needs on top of Quarto and Bootstrap.
+
+// Charts inside hidden tabs are drawn at zero width. When a tab or pill is
+// shown, fire a resize so ECharts redraws them at the right size.
+document.addEventListener("shown.bs.tab", () => window.dispatchEvent(new Event("resize")));
+
+// Keep the "Insight n of N" counter in step with the key figures carousel.
+document.querySelectorAll(".carousel").forEach((carousel) => {
+  const counter = document.querySelector(`[data-carousel="${carousel.id}"]`);
+  if (!counter) return;
+  const total = carousel.querySelectorAll(".carousel-item").length;
+  carousel.addEventListener("slid.bs.carousel", (event) => {
+    counter.textContent = `Insight ${event.to + 1} of ${total}`;
+  });
+});
+
+// Open the focus area named in the URL, e.g. bowel-cancer.html#time-to-colonoscopy.
+function openFocusArea() {
+  const slug = decodeURIComponent(location.hash.slice(1));
+  if (!slug) return;
+  document.querySelectorAll(".panel-tabset .nav-link").forEach((link) => {
+    const text = link.textContent.trim().toLowerCase().replace(/[^a-z]+/g, "-");
+    if (text === slug) bootstrap.Tab.getOrCreateInstance(link).show();
+  });
+}
+window.addEventListener("load", openFocusArea);
+window.addEventListener("hashchange", openFocusArea);

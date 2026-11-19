@@ -1,0 +1,57 @@
+project:
+  type: website
+  output-dir: _site
+  execute-dir: project
+  pre-render: Rscript data-raw/make-synthetic.R
+  render:
+    - index.qmd
+    - foreword.qmd
+    - bowel-cancer.qmd
+    - breast-cancer.qmd
+    - cervical-cancer.qmd
+    - instructions.qmd
+  resources:
+    - downloads/
+    - assets/acpcc.js
+
+website:
+  title: "Victorian Cancer Screening Statistical Report"
+  description: "Training demo built with Quarto. All figures are synthetic."
+  favicon: assets/favicon.svg
+  page-navigation: true
+  sidebar:
+    style: docked
+    logo: assets/wordmark.svg
+    logo-alt: "Cancer Screening Report (training demo)"
+    contents:
+      - text: Summary
+        href: index.qmd
+      - foreword.qmd
+      - bowel-cancer.qmd
+      - breast-cancer.qmd
+      - cervical-cancer.qmd
+      - instructions.qmd
+    tools:
+      - icon: box-arrow-up-right
+        href: https://www.acpcc.org.au/
+        text: Return to main site
+  page-footer:
+    left: "Training demo · Synthetic data only · Not an ACPCC publication"
+    right: "Built with [Quarto](https://quarto.org/) and R"
+
+format:
+  html:
+    theme: [cosmo, assets/acpcc.scss]
+    page-layout: full
+    toc: false
+    title-block-style: none
+    include-before-body: assets/banner.html
+    include-after-body:
+      text: <script src="assets/acpcc.js"></script>
+    link-external-newwindow: true
+    smooth-scroll: true
+
+execute:
+  echo: false
+  warning: false
+  message: false

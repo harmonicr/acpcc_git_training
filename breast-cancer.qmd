@@ -1,0 +1,106 @@
+---
+title: "Breast Cancer"
+description: "BreastScreen Victoria: participation and screening numbers."
+---
+
+```{r}
+source("R/setup.R")
+```
+
+::: page-hero
+[BreastScreen Victoria]{.page-kicker}
+
+# Breast Cancer
+
+BreastScreen Victoria offers free screening mammograms every two years to women aged 50 to 74. This page shows the proportion of eligible women who were screened and the number of screens performed each year.
+:::
+
+::: {.panel-tabset .focus-areas}
+
+## Participation
+
+:::: focus-area
+::: focus-text
+::: key-insight
+[Key insight]{.insight-tag}
+
+[`r key_figure("breast_participation")`]{.insight-value}
+
+of eligible women aged 50-74 participated in the breast screening program in `r latest_period("breast_participation")`.
+
+```{r}
+sparkline("breast_participation")
+```
+:::
+
+```{r}
+insight_cards("breast_participation")
+```
+
+### Interpretation
+
+Participation is highest among women in their 60s. It fell sharply in the periods that include 2020 and 2021, when BreastScreen services paused during COVID-19 restrictions, and has largely recovered since. Regional LGAs tend to sit slightly below the Victorian rate.
+
+::: {.callout-note collapse="true"}
+## Technical notes
+
+1. **Participation rate** is the number of women screened in the 2-year period divided by the estimated eligible female population aged 50-74.
+2. Women are counted once, however many screens they had in the period.
+3. Location is residential address at the time of screening.
+4. Rates are not age-standardised.
+5. **All values on this page are synthetic.** They were generated for a training exercise and must not be used for any other purpose.
+:::
+
+`r download_link("breast_participation")`
+:::
+
+::: focus-chart
+```{r}
+chart_panel("breast_participation")
+```
+:::
+::::
+
+## Screening numbers
+
+:::: focus-area
+::: focus-text
+::: key-insight
+[Key insight]{.insight-tag}
+
+[`r key_figure("breast_screening")`]{.insight-value}
+
+eligible women aged 50-74 in Victoria had a breast screen in `r latest_period("breast_screening")`.
+
+```{r}
+sparkline("breast_screening")
+```
+:::
+
+```{r}
+insight_cards("breast_screening")
+```
+
+### Interpretation
+
+The number of screens dropped steeply in 2020 and recovered over the following two years as services reopened and caught up on deferred appointments. The Variation view compares each Local Public Health Unit with its pre-pandemic level.
+
+::: {.callout-note collapse="true"}
+## Technical notes
+
+1. **Screening numbers** count screening mammograms performed in the calendar year for women aged 50-74.
+2. Diagnostic (non-screening) mammograms are excluded.
+3. **All values on this page are synthetic.**
+:::
+
+`r download_link("breast_screening")`
+:::
+
+::: focus-chart
+```{r}
+chart_panel("breast_screening")
+```
+:::
+::::
+
+:::
