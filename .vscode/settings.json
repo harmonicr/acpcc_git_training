@@ -1,0 +1,13 @@
+{
+  "files.eol": "\n",
+  "files.insertFinalNewline": true,
+  "files.trimTrailingWhitespace": true,
+  "editor.tabSize": 2,
+  "files.exclude": {
+    "**/.quarto": true,
+    "**/_site": true,
+    "renv/library": true
+  },
+  "git.autofetch": true,
+  "git.confirmSync": true
+}

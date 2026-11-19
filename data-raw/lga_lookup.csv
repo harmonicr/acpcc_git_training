@@ -1,0 +1,80 @@
+lga_code,lga_name,phn,lphu,metro
+20110,Alpine,Murray,Ovens Murray,false
+20260,Ararat,Western Victoria,Grampians,false
+20570,Ballarat,Western Victoria,Grampians,false
+20660,Banyule,Eastern Melbourne,North Eastern,true
+20740,Bass Coast,Gippsland,Gippsland,false
+20830,Baw Baw,Gippsland,Gippsland,false
+20910,Bayside (Vic.),South Eastern Melbourne,South East,true
+21010,Benalla,Murray,Goulburn Valley,false
+21110,Boroondara,Eastern Melbourne,North Eastern,true
+21180,Brimbank,North Western Melbourne,Western,true
+21270,Buloke,Murray,Loddon Mallee,false
+21370,Campaspe,Murray,Loddon Mallee,false
+21450,Cardinia,South Eastern Melbourne,South East,true
+21610,Casey,South Eastern Melbourne,South East,true
+21670,Central Goldfields,Western Victoria,Grampians,false
+21750,Colac Otway,Western Victoria,Barwon South West,false
+21830,Corangamite,Western Victoria,Barwon South West,false
+21890,Darebin,North Western Melbourne,North Eastern,true
+22110,East Gippsland,Gippsland,Gippsland,false
+22170,Frankston,South Eastern Melbourne,South East,true
+22250,Gannawarra,Murray,Loddon Mallee,false
+22310,Glen Eira,South Eastern Melbourne,South East,true
+22410,Glenelg,Western Victoria,Barwon South West,false
+22490,Golden Plains,Western Victoria,Barwon South West,false
+22620,Greater Bendigo,Murray,Loddon Mallee,false
+22670,Greater Dandenong,South Eastern Melbourne,South East,true
+22750,Greater Geelong,Western Victoria,Barwon South West,false
+22830,Greater Shepparton,Murray,Goulburn Valley,false
+22910,Hepburn,Western Victoria,Grampians,false
+22980,Hindmarsh,Western Victoria,Grampians,false
+23110,Hobsons Bay,North Western Melbourne,Western,true
+23190,Horsham,Western Victoria,Grampians,false
+23270,Hume,North Western Melbourne,North Eastern,true
+23350,Indigo,Murray,Ovens Murray,false
+23430,Kingston (Vic.),South Eastern Melbourne,South East,true
+23670,Knox,Eastern Melbourne,North Eastern,true
+23810,Latrobe (Vic.),Gippsland,Gippsland,false
+23940,Loddon,Murray,Loddon Mallee,false
+24130,Macedon Ranges,Murray,Loddon Mallee,false
+24210,Manningham,Eastern Melbourne,North Eastern,true
+24250,Mansfield,Murray,Goulburn Valley,false
+24330,Maribyrnong,North Western Melbourne,Western,true
+24410,Maroondah,Eastern Melbourne,North Eastern,true
+24600,Melbourne,North Western Melbourne,Western,true
+24650,Melton,North Western Melbourne,Western,true
+24700,Merri-bek,North Western Melbourne,Western,true
+24780,Mildura,Murray,Loddon Mallee,false
+24850,Mitchell,Murray,Goulburn Valley,false
+24900,Moira,Murray,Goulburn Valley,false
+24970,Monash,Eastern Melbourne,South East,true
+25060,Moonee Valley,North Western Melbourne,Western,true
+25150,Moorabool,Western Victoria,Grampians,false
+25340,Mornington Peninsula,South Eastern Melbourne,South East,true
+25430,Mount Alexander,Murray,Loddon Mallee,false
+25490,Moyne,Western Victoria,Barwon South West,false
+25620,Murrindindi,Murray,Goulburn Valley,false
+25710,Nillumbik,Eastern Melbourne,North Eastern,true
+25810,Northern Grampians,Western Victoria,Grampians,false
+25900,Port Phillip,South Eastern Melbourne,South East,true
+25990,Pyrenees,Western Victoria,Grampians,false
+26080,Queenscliffe,Western Victoria,Barwon South West,false
+26170,South Gippsland,Gippsland,Gippsland,false
+26260,Southern Grampians,Western Victoria,Barwon South West,false
+26350,Stonnington,South Eastern Melbourne,South East,true
+26430,Strathbogie,Murray,Goulburn Valley,false
+26490,Surf Coast,Western Victoria,Barwon South West,false
+26610,Swan Hill,Murray,Loddon Mallee,false
+26670,Towong,Murray,Ovens Murray,false
+26700,Wangaratta,Murray,Ovens Murray,false
+26730,Warrnambool,Western Victoria,Barwon South West,false
+26810,Wellington,Gippsland,Gippsland,false
+26890,West Wimmera,Western Victoria,Grampians,false
+26980,Whitehorse,Eastern Melbourne,North Eastern,true
+27070,Whittlesea,Eastern Melbourne,North Eastern,true
+27170,Wodonga,Murray,Ovens Murray,false
+27260,Wyndham,North Western Melbourne,Western,true
+27350,Yarra,North Western Melbourne,North Eastern,true
+27450,Yarra Ranges,Eastern Melbourne,North Eastern,true
+27630,Yarriambiack,Western Victoria,Grampians,false
