@@ -197,7 +197,7 @@ concurrency: { group: pages, cancel-in-progress: true }   # PRs use a per-ref gr
 jobs:
   build:
     runs-on: ubuntu-latest
-    container: rocker/verse:4.5.x        # pinned exact tag at implementation
+    container: rocker/verse:<latest R>   # exact tag pinned at implementation
     steps:
       - checkout
       - cache renv library (key: hash of renv.lock)
