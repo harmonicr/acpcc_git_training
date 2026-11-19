@@ -4,7 +4,9 @@ Status: draft for review. Nothing below is implemented yet.
 
 ## 1. Purpose
 
-A one-day introduction to Git and GitHub for ACPCC analysts who work in R and SQL and have **no prior Git knowledge**. It follows on from the earlier R session (Quarto, ggplot2, tidyverse).
+A **1-hour** introduction to Git and GitHub for ACPCC analysts who work in R and SQL and have **no prior Git knowledge**. It is one hour of a 3-hour session and follows on from the earlier R content (Quarto, ggplot2, tidyverse).
+
+One hour is enough for concepts, one demo and one hands-on loop, and no more. Setup (Git install, GitHub account, authentication) must happen **before** the session via a prerequisites email. The report site is a finished showcase that learners make small edits to; nobody builds it live.
 
 The repository is both the teaching material and the worked example:
 
@@ -61,7 +63,7 @@ What the live site uses, taken from its HTML, CSS and embedded chart configs on 
 | Light grey | `#E3E6E8` |
 | Accent blue | `#00A8E0` `#5DBDE9` `#76C6EC`, pale `#E0F7FF` |
 | Accent yellow | `#FFD457` `#FFC824`, cream `#FFFBF0` |
-| Typefaces | DINPro (headings) and D-DIN (body). D-DIN is OFL-licensed and can be self-hosted; DINPro is commercial, so headings fall back to D-DIN Bold |
+| Typefaces | Original: DINPro (headings), D-DIN (body). Recreation: **Barlow** (Google Fonts), the closest free DIN-style match |
 
 ## 4. Repository layout
 
@@ -83,7 +85,7 @@ acpcc_git_training/
 │   ├── make-synthetic.R      # seeded generator → data/screening.duckdb
 │   └── make-geo.R            # one-off: ABS boundaries → simplified GeoJSON
 ├── data/geo/                 # committed simplified GeoJSON (LGA, PHN, LPHU) + LICENCE note
-├── assets/                   # SCSS theme, fonts, carousel JS
+├── assets/                   # SCSS theme, carousel JS
 ├── renv.lock
 ├── .gitignore
 └── .github/workflows/publish.yml
@@ -120,53 +122,70 @@ The primary library is **echarts4r**, an R wrapper for the same ECharts library 
 Every chart builder lives in `R/` as a function, e.g. `chart_compare(data, by = "age_group")`. Each one is small enough to edit in an exercise, such as changing a colour, a label or a reference line.
 
 ### 5.3 Layout and styling
-- Custom SCSS theme mapped to the tokens in §3, with D-DIN self-hosted.
+- Custom SCSS theme mapped to the tokens in §3, with Barlow loaded from Google Fonts.
 - Header with wordmark and "Return to main site" link (to acpcc.org.au); sidebar navigation matching the original order.
 - Summary page: hero text and a key-figures carousel. The carousel uses Bootstrap 5's built-in carousel, which ships with Quarto, so it needs no Swiper dependency. It has 9 cards with "Insight n of 9" and next/previous controls, followed by three program cards.
 - Focus area layout: two columns (key insight + interpretation | chart panel). Technical notes sit in a collapsible callout, with the download link styled like the original's link-button.
 - A footer with copyright and the synthetic-data notice.
 - Mobile behaviour: responsive layout, plus the original's "best viewed on desktop" notice as a dismissible banner.
 
-## 6. Slide deck: Git foundations for analysts
+## 6. Session plan (60 minutes)
 
-Built from Quarto into Beamer, with a custom colour theme from the same tokens. Code is shown in `--` shell blocks; IDE steps are shown as side-by-side **RStudio | Positron** two-column slides.
+| Time | Segment | Format |
+|---|---|---|
+| 0–5 | Why version control: `report_final_v3_REAL.qmd`, "who changed this query?", reproducible published statistics | Slides |
+| 5–15 | Mental model (repo, working directory, staging, commit, branch, remote, PR) and what belongs in Git for data work | Slides |
+| 15–25 | **Live demo** of the full loop on this repo: clone, branch, change a chart colour, diff, commit, push, PR, CI check goes green, merge, Pages updates | Instructor in RStudio; Positron equivalents on slides |
+| 25–45 | **Hands-on**: Exercise 1, with Exercise 2 as a stretch goal | Learners |
+| 45–52 | Merge conflict: instructor resolves a pre-staged conflict live | Demo |
+| 52–57 | Undoing things, renv and containers, and how the CI workflow publishes the site (brief) | Slides |
+| 57–60 | Cheat sheet, where to go next, Q&A | Slides |
 
-1. **Why version control.** `report_final_v3_REAL.qmd`, lost work, "who changed this query?", and reproducibility for published statistics.
-2. **Mental model.** Repository, working directory, staging area, commit, history. A commit is a snapshot with a message.
-3. **Setup.** Install Git; configure `user.name`/`user.email`; GitHub account; authentication with a PAT via `gitcreds` / `usethis::create_github_token()` (RStudio) or GitHub sign-in (Positron).
-4. **First steps.**
-   - Clone this repo: RStudio's *New Project → Version Control*, or Positron's *Clone Git Repository*.
-   - Status, diff, stage, commit.
-   - The RStudio Git pane vs Positron's Source Control view, side by side.
-5. **What belongs in Git for data work.**
-   - Commit: code, `.qmd`, `.sql`, `renv.lock`.
-   - Don't commit: rendered outputs, data extracts, credentials, `.Renviron`.
-   - `.gitignore` walkthrough using this repo's file.
-   - Spotting identifiable data before it is committed; what to do if it happens (history is public).
-6. **Good commits.** Small and focused, a message that says why, reading diffs of `.qmd` and `.sql` files.
-7. **Branches.** Why work never happens on `main`; creating and switching branches in each IDE.
-8. **GitHub collaboration.** Push, open a pull request, review, request changes, merge. Branch protection on `main`.
-9. **Merge conflicts.** What they look like in a `.qmd` file and how to resolve them in each IDE.
-10. **Undoing things.** Discard changes, amend, revert, restoring a deleted file. When *not* to rewrite history.
-11. **Reproducibility.** renv, pinned containers, "works on my machine".
-12. **CI/CD.** What GitHub Actions does, reading this repo's workflow line by line, and how this site gets published.
-13. **Cheat sheet.** Command / RStudio / Positron equivalence table (also in `exercises/`).
+## 7. Slide deck: Git foundations for analysts
 
-## 7. Exercises
+Quarto → Beamer, about 25 core slides plus a reference appendix for self-study after the session. A custom colour theme uses the §3 tokens. IDE steps are two-column **RStudio | Positron** slides, with the command-line equivalent in a footnote-style strip.
+
+**Core (presented):**
+1. Why version control
+2. Mental model: snapshots, staging area, history. A commit is a snapshot with a message
+3. What belongs in Git for data work:
+   - Commit: code, `.qmd`, `.sql`, `renv.lock`
+   - Don't commit: rendered outputs, data extracts, credentials, `.Renviron`
+   - This repo's `.gitignore` as the example
+   - Identifiable data: history is public and hard to scrub, so check before you commit
+4. The daily loop in each IDE:
+   - **RStudio**: Git pane, Diff, Commit, Push
+   - **Positron**: Source Control view, stage, commit, Sync
+5. Branches and pull requests: why work never happens on `main`, and what branch protection does
+6. Merge conflicts: the markers in a `.qmd` file and resolving them in each IDE
+7. Good commits: small, focused, a message that says why
+8. CI/CD in one slide: this repo's workflow, annotated
+9. Cheat sheet: command / RStudio / Positron equivalence table
+
+**Appendix (not presented; linked from the site):**
+- Setup and authentication in detail
+- Undoing things: discard, amend, revert, restore a deleted file, and when not to rewrite history
+- renv and pinned containers
+- The full workflow file explained line by line
+
+## 8. Exercises
 
 Each exercise is a page under `exercises/` and on the site, with numbered steps for RStudio, Positron and the command line.
 
-| # | Exercise | Teaches |
+| # | Exercise | When |
 |---|---|---|
-| 0 | Setup check: Git installed, identity set, GitHub auth, clone, `renv::restore()`, render locally | Setup |
-| 1 | Edit your name into `exercises/attendees.qmd` on a branch `<yourname>/hello` → commit → push → PR | Core loop |
-| 2 | Change a chart (colour, reference line or label in `R/`) → PR → watch the CI check → merge after review → see Pages update | CI/CD |
-| 3 | Edit a SQL query (e.g. change an age band) and read the diff | Diffs of code vs data |
-| 4 | Scripted merge conflict: pairs edit the same Key insight line | Conflict resolution |
-| 5 | "Oops": commit a fake `data/extract.csv`, then remove it and add it to `.gitignore` | Hygiene, `.gitignore` |
-| 6 | Revert a merged change | Undoing safely |
+| 0 | Setup check: Git installed, identity set, GitHub auth, accepted collaborator invite, cloned the repo, `renv::restore()`, rendered locally | **Before the session** (prerequisites email) |
+| 1 | Branch `<yourname>/hello` → add `exercises/attendees/<yourname>.qmd` → commit → push → open a PR | In session |
+| 2 | On a new branch, change a chart in `R/` (colour, label or reference line) → PR → watch the CI check | In session (stretch) |
+| 3 | Edit a SQL query and read the diff | Take-home |
+| 4 | Commit a fake `data/extract.csv`, then remove it and add it to `.gitignore` | Take-home |
+| 5 | Revert a merged change | Take-home |
 
-## 8. CI/CD pipeline (`.github/workflows/publish.yml`)
+Each learner adds their **own** file for Exercise 1, and a Quarto listing page collects them. That way 20 PRs merge cleanly, and conflicts only appear in the controlled demo. The instructor merges PRs during the session. Pages redeploys after each merge (`cancel-in-progress` keeps this quick).
+
+The conflict demo uses two pre-staged branches that edit the same Key insight line, so it doesn't depend on learners.
+
+## 9. CI/CD pipeline (`.github/workflows/publish.yml`)
 
 ```yaml
 on:
@@ -209,24 +228,24 @@ jobs:
 - Branch protection on `main`: require a PR, require the `build` check
 - Add learners as collaborators (Write role)
 
-## 9. Tasks
+## 10. Tasks
 
 | ID | Task | Depends on |
 |---|---|---|
 | T1 | Repo scaffold: `_quarto.yml`, `.gitignore`, `.Rproj`, Positron settings, renv init, README | n/a |
 | T2 | Geography: ABS LGA/PHN/LPHU boundaries → simplified GeoJSON + licence note | T1 |
 | T3 | Synthetic data generator + DuckDB + SQL queries | T1, T2 |
-| T4 | Theme: SCSS, fonts, header/sidebar/footer, synthetic-data banner | T1 |
+| T4 | Theme: SCSS, Barlow, header/sidebar/footer, synthetic-data banner | T1 |
 | T5 | Chart builders in `R/` (compare, map, trend, funnel, dumbbell, sparkline) | T3, T4 |
 | T6 | Report pages: Summary + carousel, Foreword, 3 program pages, Instructions | T5 |
 | T7 | Beamer theme + slide deck content | T4 |
 | T8 | Exercises + cheat sheet | T6, T7 |
 | T9 | GitHub Actions workflow; verify on real runner + Pages publish | T6, T7 |
-| T10 | Facilitator notes: run sheet, timings, prerequisites email, common failure fixes | T8, T9 |
+| T10 | Facilitator notes: §6 run sheet, prerequisites email (Exercise 0, send a week ahead), pre-staged conflict branches, common failure fixes | T8, T9 |
 
-## 10. Open questions
+## 11. Resolved questions
 
-1. **Session length.** This spec assumes one full day. If it's a half day, cut exercises 3, 5 and 6 and deck sections 10 and 11.
-2. **R version for learners.** Pin to the version on ACPCC machines if known; otherwise 4.5.
-3. **Fonts.** OK to self-host D-DIN (OFL), or prefer a Google Fonts near-match (Barlow) for simplicity?
-4. **Positron/RStudio versions** on learner machines, so menu names in the instructions match.
+1. **Session length:** 1 hour within a 3-hour session (see §6).
+2. **R version:** latest release, used in both `renv.lock` and the pinned `rocker/verse` tag.
+3. **Fonts:** Barlow from Google Fonts.
+4. **IDE versions:** latest RStudio and Positron releases at implementation time; menu names are written against those.
