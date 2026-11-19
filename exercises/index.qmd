@@ -1,0 +1,24 @@
+---
+title: "Exercises"
+description: "Hands-on Git exercises for RStudio, Positron and the terminal."
+---
+
+Each exercise gives steps for **RStudio**, **Positron** and the **terminal**. Choose a tab once and every page remembers your choice.
+
+| # | Exercise | When | What you'll learn |
+|---|---|---|---|
+| 0 | [Setup check](00-setup.qmd) | Before the session | Install, sign in, clone, render |
+| 1 | [Your first pull request](01-first-pull-request.qmd) | In the session | Branch, commit, push, pull request |
+| 2 | [Change a chart](02-change-a-chart.qmd) | In the session (stretch) | Editing code, CI checks |
+| 3 | [Read a SQL diff](03-sql-diff.qmd) | Take-home | Diffs of queries and their output |
+| 4 | [Oops, I committed data](04-committed-data.qmd) | Take-home | `.gitignore`, removing tracked files |
+| 5 | [Undo a change safely](05-revert.qmd) | Take-home | `git revert` |
+
+The [cheat sheet](cheatsheet.qmd) has every command on one page.
+
+::: {.callout-important}
+## Ground rules
+
+- Never commit to `main`. Always work on a branch named `yourname/what-you-are-doing`.
+- Never commit real data. Everything in this repository is synthetic, and it should stay that way.
+:::

@@ -337,8 +337,8 @@ $footer-fg: #ffffff;
   a { color: $blue-light; }
 }
 
-// Each page draws its own hero, so hide Quarto's default title block.
-#title-block-header { display: none; }
+// Report pages draw their own hero, so hide Quarto's default title block there.
+body:has(.page-hero) #title-block-header { display: none; }
 
 // Quarto styles every .tab-content inside a tabset; the chart panel's own
 // pills don't need the border.

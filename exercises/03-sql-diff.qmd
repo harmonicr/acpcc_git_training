@@ -1,0 +1,71 @@
+---
+title: "Exercise 3: Read a SQL diff"
+description: "Change a query and compare the code diff with the output."
+---
+
+**Goal**: see why keeping logic in plain-text files (`.sql`, `.R`, `.qmd`) makes changes easy to review, and binary outputs (`.xlsx`) don't.
+
+## 1. Branch and edit the query
+
+1. Create a branch `alex/rate-precision` from an up-to-date `main`.
+2. Open `sql/data_table.sql`. It builds the Excel table each focus area offers for download.
+3. Make two changes: show the rate to two decimal places, and rename the column.
+
+```sql
+-- before
+  round(100 * s.numerator / s.denominator, 1) AS "Rate (%)"
+-- after
+  round(100 * s.numerator / s.denominator, 2) AS "Rate (per cent)"
+```
+
+## 2. Look at the diff
+
+::: {.panel-tabset group="ide"}
+## RStudio
+
+Git pane → select `sql/data_table.sql` → **Diff**.
+
+## Positron
+
+Source Control → click `data_table.sql`. The side-by-side view highlights the changed characters within the line.
+
+## Terminal
+
+```bash
+git diff --word-diff sql/data_table.sql
+```
+
+`--word-diff` shows exactly which words changed inside a line.
+:::
+
+One line changed, and a reviewer can see exactly how.
+
+## 3. Compare with the output
+
+Render the page and open the Excel download:
+
+```bash
+quarto render bowel-cancer.qmd
+```
+
+`downloads/bowel_participation.xlsx` has changed too, but Git can't show you how: `.xlsx` is a binary (zipped) format. This is why the repository ignores `downloads/` and keeps the query instead. The query is the thing to review; the spreadsheet is rebuilt from it.
+
+## 4. Discard or commit
+
+If you want to keep the change, commit and push it as in Exercise 1. Otherwise throw it away:
+
+::: {.panel-tabset group="ide"}
+## RStudio
+
+Git pane → right-click `sql/data_table.sql` → **Revert...** → **Yes**.
+
+## Positron
+
+Source Control → hover over the file → **Discard Changes** (curved arrow) → **Discard File**.
+
+## Terminal
+
+```bash
+git restore sql/data_table.sql
+```
+:::

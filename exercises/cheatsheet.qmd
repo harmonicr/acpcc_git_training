@@ -1,0 +1,38 @@
+---
+title: "Cheat sheet"
+description: "Git in RStudio, Positron and the terminal."
+---
+
+| Task | RStudio | Positron | Terminal |
+|---|---|---|---|
+| Clone a repository | *File → New Project → Version Control → Git* | *File → New Folder from Git...* | `git clone URL` |
+| See which branch you're on | Branch menu, top right of the Git pane | Status bar, bottom left | `git branch --show-current` |
+| Create a branch | Git pane → **New Branch** | Status bar → **Create new branch...** | `git switch -c name` |
+| Switch branch | Git pane branch menu | Status bar branch menu | `git switch name` |
+| See what changed | Git pane → **Diff** | Source Control → click the file | `git status`, `git diff` |
+| Stage a file | Tick **Staged** | **+** next to the file | `git add file` |
+| Unstage a file | Untick **Staged** | **−** next to the file | `git restore --staged file` |
+| Commit | **Commit** → message → **Commit** | Message box → **Commit** | `git commit -m "message"` |
+| Push a new branch | **Push** | **Publish Branch** | `git push -u origin name` |
+| Push / pull | **Push** / **Pull** arrows | **Sync Changes** | `git push`, `git pull` |
+| Discard edits to a file | Right-click → **Revert...** | **Discard Changes** | `git restore file` |
+| Fix the last commit (not pushed) | Tick **Amend previous commit** | **...** → **Commit** → **Commit (Amend)** | `git commit --amend` |
+| Undo a pushed commit | Terminal | Terminal | `git revert <id>` |
+| History | **History** (clock icon) | Source Control Graph | `git log --oneline` |
+| Stop tracking a file | Terminal | Terminal | `git rm --cached file` |
+
+## Conflict markers
+
+```
+<<<<<<< HEAD
+your version
+=======
+their version
+>>>>>>> other-branch
+```
+
+Edit to the text you want, delete all three marker lines, then stage and commit.
+
+## Branch names
+
+`yourname/short-description`, lowercase, hyphens instead of spaces: `alex/fix-phn-labels`.

@@ -189,8 +189,7 @@ The conflict demo uses two pre-staged branches that edit the same Key insight li
 
 ```yaml
 on:
-  push: { branches: [main] }
-  pull_request:
+  push:            # every branch gets a check; only main deploys
   workflow_dispatch:
 permissions: { contents: read, pages: write, id-token: write }
 concurrency: { group: pages, cancel-in-progress: true }   # PRs use a per-ref group

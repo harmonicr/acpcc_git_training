@@ -1,0 +1,12 @@
+---
+title: "Attendees"
+description: "Added through pull requests in Exercise 1."
+listing:
+  contents: attendees
+  type: grid
+  sort: title
+  fields: [title, description]
+  grid-columns: 4
+---
+
+Each card below is a file in `exercises/attendees/`, added by its owner through a pull request in [Exercise 1](01-first-pull-request.qmd).

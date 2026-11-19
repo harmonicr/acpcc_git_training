@@ -1,0 +1,75 @@
+---
+title: "Exercise 4: Oops, I committed data"
+description: "Keep data out of Git with .gitignore, and remove a file Git already tracks."
+---
+
+**Goal**: practise the two ways to keep a data extract out of Git: before it's committed (`.gitignore`) and after (`git rm --cached`).
+
+::: {.callout-warning}
+Do this exercise on a branch and **don't push it**. The file is synthetic, but practise as if it weren't.
+:::
+
+## 1. Make an "extract"
+
+Create a branch `alex/extract-practice`, then in the R console:
+
+```r
+source("R/setup.R")
+readr::write_csv(compare_data("bowel_participation"), "data/extract.csv")
+```
+
+`data/extract.csv` appears in the Git pane / Source Control view as a new, untracked file. Nothing is committed yet, but one careless "stage all" and it would be.
+
+## 2. Prevent it: add a `.gitignore` rule
+
+Open `.gitignore`. Under the line `# Exercise 4 adds a rule for ad hoc extracts here.`, add:
+
+```gitignore
+data/*.csv
+```
+
+Save. `data/extract.csv` disappears from the list of changes, and `.gitignore` appears as modified. Commit `.gitignore` with the message `Ignore CSV extracts in data/`.
+
+## 3. The harder case: it's already committed
+
+Undo the rule for a moment (delete the line, save), then stage and commit `data/extract.csv` with the message `Add extract (mistake)`. Git now tracks it.
+
+Adding the `.gitignore` rule back is **not enough**: `.gitignore` only affects files Git doesn't already track. You need to tell Git to stop tracking the file, without deleting your copy. In the **Terminal** (this has no button in either IDE):
+
+```bash
+git rm --cached data/extract.csv
+```
+
+Then put the `data/*.csv` rule back in `.gitignore`, stage both changes, and commit with the message `Stop tracking data extract`.
+
+## 4. Look at the history
+
+::: {.panel-tabset group="ide"}
+## RStudio
+
+Git pane → **History** (clock icon). Select the `Add extract (mistake)` commit: the CSV is still there in full.
+
+## Positron
+
+Source Control → **Source Control Graph** section → select the `Add extract (mistake)` commit and its file.
+
+## Terminal
+
+```bash
+git log --oneline
+git show --stat HEAD~1
+```
+:::
+
+The file is gone from the latest commit **but still in history**. Anyone who can see the repository can recover it. Had you pushed, the only real fix is rewriting history across every copy, plus treating the data as disclosed.
+
+**Lesson**: stop data at the `.gitignore` stage, and read the list of staged files before every commit.
+
+## 5. Clean up
+
+Switch back to `main` and delete the practice branch:
+
+```bash
+git switch main
+git branch -D alex/extract-practice
+```

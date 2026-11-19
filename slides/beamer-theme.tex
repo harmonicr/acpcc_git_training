@@ -1,0 +1,37 @@
+% Colours and fonts for the Beamer deck, matching the report site.
+\usepackage[sfdefault]{FiraSans}
+\usepackage{FiraMono}
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta}
+
+\definecolor{ink}{HTML}{060709}
+\definecolor{slate}{HTML}{454E54}
+\definecolor{slatelight}{HTML}{8F9AA3}
+\definecolor{greylight}{HTML}{E3E6E8}
+\definecolor{acpccblue}{HTML}{00A8E0}
+\definecolor{bluedark}{HTML}{00698C}
+\definecolor{paleblue}{HTML}{E0F7FF}
+\definecolor{acpccyellow}{HTML}{FFD457}
+\definecolor{paleyellow}{HTML}{FFFBF0}
+
+\setbeamercolor{normal text}{fg=ink, bg=white}
+\setbeamercolor{alerted text}{fg=bluedark}
+\setbeamercolor{frametitle}{fg=white, bg=ink}
+\setbeamercolor{progress bar}{fg=acpccblue, bg=greylight}
+\setbeamercolor{title separator}{fg=acpccblue}
+\setbeamercolor{background canvas}{bg=white}
+\setbeamercolor{section in toc}{fg=ink}
+\setbeamercolor{footline}{fg=slatelight}
+
+\metroset{progressbar=frametitle, numbering=fraction, block=fill}
+
+% A strip at the bottom of IDE slides showing the command-line equivalent.
+\newcommand{\cmdline}[1]{%
+  \begin{beamercolorbox}[wd=\textwidth, sep=6pt, rounded=true]{cmdline}%
+    {\footnotesize\textcolor{slatelight}{Terminal:}\quad\texttt{#1}}%
+  \end{beamercolorbox}}
+\setbeamercolor{cmdline}{fg=ink, bg=greylight}
+
+% Tighter tables so the IDE comparison tables fit.
+\renewcommand{\arraystretch}{1.15}
+\AtBeginEnvironment{longtable}{\footnotesize}

@@ -1,0 +1,46 @@
+---
+title: "Exercise 5: Undo a change safely"
+description: "Use git revert to undo a commit without rewriting history."
+---
+
+**Goal**: undo a commit that has already been pushed, the safe way.
+
+## 1. Make a change you'll regret
+
+1. Create a branch `alex/revert-practice` from an up-to-date `main`.
+2. In `index.qmd`, change the heading `# Victorian Cancer Screening Statistical Report` to `# Victorian Cancer Screening Statistical Repot` (a typo).
+3. Commit with the message `Update title` and push.
+
+## 2. Revert it
+
+Pretend this was merged and published. You can't delete the commit, because other people may already have it. Instead, add a **new** commit that does the opposite. In the **Terminal** tab of either IDE:
+
+```bash
+git log --oneline -3
+git revert --no-edit HEAD
+```
+
+Git creates a commit with the message `Revert "Update title"`. Push it as usual.
+
+## 3. Check
+
+::: {.panel-tabset group="ide"}
+## RStudio
+
+Git pane → **History**. Both commits are there: the mistake and its revert. `index.qmd` is back to the original text.
+
+## Positron
+
+Source Control Graph shows both commits. `index.qmd` is back to the original text.
+
+## Terminal
+
+```bash
+git log --oneline -3
+git diff HEAD~2 HEAD -- index.qmd   # no output: the net change is nothing
+```
+:::
+
+**Revert, don't rewrite.** Commands like `git reset --hard` and force-pushing delete history; on a shared branch they cause problems for everyone else. `git revert` is always safe.
+
+To revert an older commit, use its ID from `git log --oneline`, e.g. `git revert 3f2a1bc`.

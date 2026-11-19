@@ -1,0 +1,136 @@
+---
+title: "Exercise 1: Your first pull request"
+description: "Branch, commit, push and open a pull request."
+---
+
+**Goal**: add yourself to the [attendees page](attendees.qmd) through the full Git workflow: branch → edit → commit → push → pull request.
+
+You'll create your **own file**, so nobody's change conflicts with anyone else's.
+
+## 1. Get the latest version of `main`
+
+::: {.panel-tabset group="ide"}
+## RStudio
+
+1. In the **Git** pane, check the branch menu (top right of the pane) says `main`.
+2. Select **Pull** (blue down arrow).
+
+## Positron
+
+1. Check the status bar (bottom left) says `main`.
+2. In **Source Control**, select **...** → **Pull**.
+
+## Terminal
+
+```bash
+git switch main
+git pull
+```
+:::
+
+## 2. Create a branch
+
+Use your first name, then a slash, then `hello`, e.g. `alex/hello`. Lowercase, no spaces.
+
+::: {.panel-tabset group="ide"}
+## RStudio
+
+1. In the **Git** pane, select **New Branch** (the purple icon).
+2. **Branch name**: `alex/hello`
+3. Leave **Remote** as `origin` and **Sync branch with remote** ticked.
+4. Select **Create**. The branch menu now shows `alex/hello`.
+
+## Positron
+
+1. Click `main` in the status bar.
+2. Choose **Create new branch...**
+3. Type `alex/hello` and press Enter. The status bar now shows `alex/hello`.
+
+## Terminal
+
+```bash
+git switch -c alex/hello
+```
+:::
+
+## 3. Add your file
+
+1. Open `exercises/attendees/example.qmd`.
+2. Save a copy as `exercises/attendees/alex.qmd` (your name, lowercase).
+3. Change the `title` to your name and the `description` to a sentence about your work. Save.
+
+The **Git** pane (RStudio) or **Source Control** view (Positron) now lists your new file as untracked (`?` or `U`).
+
+## 4. Commit
+
+::: {.panel-tabset group="ide"}
+## RStudio
+
+1. In the **Git** pane, select **Commit**. The **Review Changes** window opens.
+2. Tick **Staged** next to `exercises/attendees/alex.qmd`. The diff below shows every line as added (green).
+3. **Commit message**: `Add Alex to attendees`
+4. Select **Commit**, then **Close**.
+
+## Positron
+
+1. In **Source Control**, hover over `alex.qmd` and select **+** (Stage Changes).
+2. In the message box at the top, type `Add Alex to attendees`.
+3. Select **Commit**.
+
+## Terminal
+
+```bash
+git add exercises/attendees/alex.qmd
+git commit -m "Add Alex to attendees"
+```
+:::
+
+## 5. Push
+
+::: {.panel-tabset group="ide"}
+## RStudio
+
+Select **Push** (green up arrow) in the **Git** pane.
+
+## Positron
+
+Select **Publish Branch** in **Source Control**.
+
+## Terminal
+
+```bash
+git push -u origin alex/hello
+```
+:::
+
+## 6. Open a pull request
+
+1. Go to <https://github.com/harmonicr/acpcc_git_training>. A yellow banner says your branch had recent pushes. Select **Compare & pull request**.
+2. Check the arrow reads **base: main ← compare: alex/hello**.
+3. Leave the title, add a line in the description, then select **Create pull request**.
+4. Scroll down. A check called **render** starts; it builds the whole site with your change. Wait for the green tick (about 3-5 minutes).
+
+The facilitator reviews and merges the pull requests. After yours is merged, your name appears on the [attendees page](attendees.qmd) of the live site within a few minutes.
+
+## 7. Tidy up
+
+Switch back to `main` and pull, so your copy includes everyone's changes:
+
+::: {.panel-tabset group="ide"}
+## RStudio
+
+Choose `main` from the branch menu in the **Git** pane, then select **Pull**.
+
+## Positron
+
+Click the branch name in the status bar, choose `main`, then **Sync Changes** (or **...** → **Pull**).
+
+## Terminal
+
+```bash
+git switch main
+git pull
+```
+:::
+
+`exercises/attendees/` now contains everyone's files.

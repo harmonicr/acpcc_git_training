@@ -1,0 +1,467 @@
+---
+title: "Git foundations for analysts"
+subtitle: "Version control for R, SQL and Quarto work"
+author: "ACPCC analytics training"
+date: last-modified
+date-format: "D MMMM YYYY"
+format:
+  beamer:
+    aspectratio: 169
+    theme: metropolis
+    slide-level: 2
+    section-titles: true
+    highlight-style: github
+    fontsize: 11pt
+    include-in-header: beamer-theme.tex
+    keep-tex: false
+---
+
+# Why version control
+
+## Sound familiar?
+
+:::: columns
+::: {.column width="48%"}
+```
+report_final.qmd
+report_final_v2.qmd
+report_final_v2_TM_edits.qmd
+report_final_v3_REAL.qmd
+participation_query_OLD.sql
+participation_query_new_new.sql
+```
+:::
+::: {.column width="48%"}
+- Which file did the published figures come from?
+- Who changed the age bands in the query, and why?
+- The chart was right last week. What changed?
+- Two people edited the same report. Whose version wins?
+:::
+::::
+
+\bigskip
+**Git answers all four**, and it does it without renaming a single file.
+
+## What Git gives an analyst
+
+- **History**: every saved version of every file, with who changed it, when and why
+- **Safety**: try something on a copy (a *branch*) without touching the working version
+- **Collaboration**: several people work on the same report and combine their changes
+- **Review**: a colleague can see exactly what changed before it is published
+- **Reproducibility**: re-run the exact code that produced last year's report
+
+\bigskip
+**Git** is the tool on your computer. **GitHub** is a website that hosts Git repositories and adds pull requests, reviews and automation.
+
+# The mental model
+
+## Three places your work lives
+
+```{=latex}
+\begin{center}
+\resizebox{\textwidth}{!}{%
+\begin{tikzpicture}[
+  box/.style={draw=slate, rounded corners=4pt, minimum width=3.2cm, minimum height=1.5cm, align=center, font=\small, fill=white, line width=0.8pt},
+  arr/.style={-{Stealth[length=3mm]}, line width=1.2pt, draw=acpccblue},
+  lbl/.style={font=\footnotesize\ttfamily, text=ink}
+]
+\node[box] (wd) at (0,0) {\textbf{Working folder}\\files you edit};
+\node[box] (st) at (4.6,0) {\textbf{Staging area}\\changes picked\\for the next commit};
+\node[box, fill=paleblue] (repo) at (9.2,0) {\textbf{Local repository}\\every commit,\\on your computer};
+\node[box, fill=paleyellow] (gh) at (13.8,0) {\textbf{GitHub}\\shared copy\\(the remote)};
+\draw[arr] (wd) -- node[above, lbl] {stage} (st);
+\draw[arr] (st) -- node[above, lbl] {commit} (repo);
+\draw[arr] (repo.north east) to[bend left=20] node[above, lbl] {push} (gh.north west);
+\draw[arr] (gh.south west) to[bend left=20] node[below, lbl] {pull} (repo.south east);
+\end{tikzpicture}}
+\end{center}
+```
+
+- A **commit** is a snapshot of the files you staged, plus a message saying why.
+- Nothing reaches GitHub until you **push**. Nothing from colleagues reaches you until you **pull**.
+
+## Vocabulary
+
+| Term | Meaning |
+|---|---|
+| Repository (repo) | A project folder whose history Git tracks |
+| Clone | Download a copy of a repo from GitHub, history included |
+| Commit | A saved snapshot with a message |
+| Branch | A separate line of work; `main` is the published one |
+| Push / pull | Send your commits to GitHub / fetch other people's |
+| Pull request (PR) | A request to merge your branch into `main`, with review |
+| Merge conflict | Two branches changed the same lines; you choose the result |
+
+## What belongs in Git for data work
+
+:::: columns
+::: {.column width="48%"}
+**Commit**
+
+- R scripts and functions
+- `.qmd` reports and slides
+- `.sql` queries
+- `renv.lock` (package versions)
+- Small reference tables, e.g. lookups
+- `.gitignore`
+:::
+::: {.column width="48%"}
+**Never commit**
+
+- Data extracts, `.csv` / `.xlsx` with records
+- Anything identifiable, even "temporarily"
+- Passwords, tokens, `.Renviron`
+- Rendered output (`_site/`, `.html`, `.pdf`)
+- Large files (over a few MB)
+:::
+::::
+
+\bigskip
+**History is permanent and this repo is public.** Deleting a file in a later commit does not remove it from history. Check before you commit.
+
+## `.gitignore` keeps files out by default
+
+```gitignore
+# Personal settings and secrets. Never commit these.
+.Renviron
+
+# Rendered output is rebuilt by GitHub Actions.
+/_site/
+*.html
+
+# The database is regenerated from data-raw/make-synthetic.R.
+data/*.duckdb
+```
+
+- One pattern per line. `#` starts a comment.
+- Ignored files don't appear in the Git pane or Source Control view.
+- This repo's `.gitignore` is commented: read it.
+
+# The daily loop
+
+## Get the project: clone
+
+:::: columns
+::: {.column width="48%"}
+**RStudio**
+
+1. *File → New Project → Version Control → Git*
+2. Paste the repository URL
+3. Choose a folder, then *Create Project*
+:::
+::: {.column width="48%"}
+**Positron**
+
+1. *File → New Folder from Git...* (or the *Clone Git Repository* button on the Welcome page)
+2. Paste the repository URL
+3. Choose a parent folder, then *Open*
+:::
+::::
+
+\vfill
+\cmdline{git clone https://github.com/harmonicr/acpcc\_git\_training.git}
+
+## Never work on `main`: create a branch
+
+:::: columns
+::: {.column width="48%"}
+**RStudio**
+
+1. Git pane → *New Branch* (purple icon)
+2. Name it, e.g. `alex/fix-legend`
+3. Leave *Sync branch with remote* ticked → *Create*
+
+Switch branches with the branch menu at the top right of the Git pane.
+:::
+::: {.column width="48%"}
+**Positron**
+
+1. Click the branch name in the status bar (bottom left)
+2. *Create new branch...*
+3. Name it, e.g. `alex/fix-legend`, press Enter
+
+Switch branches from the same status bar menu.
+:::
+::::
+
+\vfill
+\cmdline{git switch -c alex/fix-legend}
+
+## See what changed: status and diff
+
+:::: columns
+::: {.column width="48%"}
+**RStudio**
+
+- Git pane lists changed files: **M** modified, **?** new, **D** deleted
+- Select a file → *Diff* to see removed lines (red) and added lines (green)
+:::
+::: {.column width="48%"}
+**Positron**
+
+- Source Control view (`Ctrl+Shift+G`) lists changed files: **M**, **U** (untracked), **D**
+- Click a file to open a side-by-side diff
+:::
+::::
+
+\vfill
+\cmdline{git status \quad git diff}
+
+## Save a snapshot: stage and commit
+
+:::: columns
+::: {.column width="48%"}
+**RStudio**
+
+1. Git pane → *Commit* opens *Review Changes*
+2. Tick *Staged* for the files to include
+3. Write a message → *Commit*
+:::
+::: {.column width="48%"}
+**Positron**
+
+1. Hover a file in Source Control → **+** to stage
+2. Type a message in the box at the top
+3. Click *Commit*
+:::
+::::
+
+\vfill
+\cmdline{git add R/charts.R \quad git commit -m "Use Victoria colour for reference line"}
+
+## Share it: push
+
+:::: columns
+::: {.column width="48%"}
+**RStudio**
+
+- Git pane → *Push* (green up arrow)
+- *Pull* (blue down arrow) fetches other people's commits
+:::
+::: {.column width="48%"}
+**Positron**
+
+- First push of a new branch: *Publish Branch*
+- After that: *Sync Changes* (pulls, then pushes)
+:::
+::::
+
+\vfill
+\cmdline{git push -u origin alex/fix-legend \quad git pull}
+
+## Good commits
+
+- **Small and focused**: one logical change per commit
+- **A message that says why**, not just what
+
+\medskip
+:::: columns
+::: {.column width="48%"}
+Hard to review later:
+
+```
+update
+fix
+changes from meeting
+wip stuff
+```
+:::
+::: {.column width="48%"}
+Useful:
+
+```
+Exclude 75+ from bowel query
+Fix PHN names in lookup
+Add 2024 to coverage query
+Shade COVID-19 on trends
+```
+:::
+::::
+
+- Read the diff before you commit. Did anything unexpected sneak in?
+
+# Working together on GitHub
+
+## Pull requests
+
+1. Push your branch
+2. On GitHub, *Compare & pull request*
+3. Describe the change and why; request a reviewer
+4. GitHub Actions renders the site and reports a **check** (green tick or red cross)
+5. Reviewer reads the diff, comments or approves
+6. *Merge pull request* → your change is on `main`
+
+\bigskip
+**Branch protection** on `main` makes this the only way in: no direct pushes, the check must pass, and someone must approve.
+
+## Reading a diff of a report
+
+```diff
+ ## Participation
+
+-Participation rises steadily with age.
++Participation rises steadily with age, from 39% at 50-54
++to 48% at 70-74.
+
+-key_figure("bowel_participation")
++key_figure("bowel_screening")
+```
+
+- Plain-text files (`.R`, `.sql`, `.qmd`) give readable diffs.
+- Binary files (`.xlsx`, `.docx`, `.png`) don't: another reason to keep logic in code.
+
+## Merge conflicts
+
+Two branches changed the same line. Git can't choose, so it marks both:
+
+```
+<<<<<<< HEAD
+Participation is highest in the 70-74 age group.
+=======
+Participation peaks among people aged 70-74.
+>>>>>>> sam/edit-insight
+```
+
+1. Edit the file to the text you want and **delete all three marker lines**
+2. Stage and commit the result
+
+:::: columns
+::: {.column width="48%"}
+**RStudio**: edit in the editor, then stage and commit as usual.
+:::
+::: {.column width="48%"}
+**Positron**: use *Accept Current*, *Accept Incoming* or *Accept Both* above the conflict, or *Resolve in Merge Editor*.
+:::
+::::
+
+# Safety nets
+
+## Undoing things {.shrink}
+
+| I want to... | RStudio | Positron | Terminal |
+|---|---|---|---|
+| Throw away unsaved edits to a file | Git pane → right-click → *Revert* | Source Control → *Discard Changes* | `git restore file` |
+| Unstage a file | Untick *Staged* | **−** next to the file | `git restore --staged file` |
+| Fix the last commit message (before pushing) | Tick *Amend previous commit* | *Commit (Amend)* in the *...* menu | `git commit --amend` |
+| Undo a pushed commit | Terminal | Terminal | `git revert <commit>` |
+
+\bigskip
+**Revert, don't rewrite.** `git revert` adds a new commit that undoes an old one, so shared history stays intact.
+
+## Reproducibility: same code, same result
+
+- **renv** records every package version in `renv.lock`
+  - `renv::restore()` installs exactly those versions
+  - `renv::snapshot()` after adding a package, then commit `renv.lock`
+- **A pinned container** (`rocker/verse:4.6.2`) gives GitHub Actions the same R, Quarto and LaTeX every time
+- **Data is rebuilt from code**: `data-raw/make-synthetic.R` uses a fixed seed, so everyone gets identical numbers
+
+## CI/CD: GitHub Actions {.shrink}
+
+`.github/workflows/publish.yml` runs on every push:
+
+```yaml
+jobs:
+  render:
+    runs-on: ubuntu-latest
+    container: rocker/verse:4.6.2   # R, Quarto, LaTeX
+    steps:
+      - uses: actions/checkout@v7
+      - run: Rscript -e 'renv::restore()'
+      - run: quarto render           # site + these slides
+  deploy:
+    if: github.ref == 'refs/heads/main'
+    # publishes _site/ to GitHub Pages
+```
+
+- On a branch: renders and reports a check on your pull request
+- On `main`: renders and publishes the site
+
+# Summary
+
+## Cheat sheet {.shrink}
+
+| Task | RStudio | Positron | Terminal |
+|---|---|---|---|
+| Clone | New Project → Version Control | New Folder from Git | `git clone URL` |
+| New branch | Git pane → New Branch | Status bar → Create new branch | `git switch -c name` |
+| See changes | Git pane → Diff | Source Control → click file | `git diff` |
+| Stage | Tick *Staged* | **+** | `git add file` |
+| Commit | Commit → message → Commit | Message → Commit | `git commit -m "..."` |
+| Push | Push (green arrow) | Publish Branch / Sync | `git push` |
+| Get updates | Pull (blue arrow) | Sync Changes | `git pull` |
+| History | History (clock icon) | Source Control Graph | `git log --oneline` |
+
+## Where next
+
+- Exercises 3-5 on the course site (SQL diffs, removing a committed file, reverting)
+- *Happy Git and GitHub for the useR*: <https://happygitwithr.com>
+- Positron Git docs: <https://positron.posit.co/git.html>
+- Pro Git book (free): <https://git-scm.com/book>
+
+\bigskip
+**Rule of thumb**: branch, small commits, pull request, review, merge.
+
+# Appendix
+
+## Setup: install and identify yourself
+
+1. Install Git: <https://git-scm.com/downloads> (Windows: accept the defaults)
+2. Tell Git who you are, once per computer. In the R console:
+
+```r
+# Use the email address on your GitHub account
+usethis::use_git_config(
+  user.name  = "Alex Smith",
+  user.email = "alex.smith@example.org"
+)
+```
+
+3. Check: `usethis::git_sitrep()`
+
+## Setup: authenticate with GitHub
+
+GitHub doesn't accept passwords for Git. Use a personal access token (PAT), set up once:
+
+```r
+# Opens GitHub: keep the default scopes
+usethis::create_github_token()
+# Paste the token when asked
+gitcreds::gitcreds_set()
+```
+
+- The token is stored in your operating system's credential store, so RStudio, Positron and the terminal all use it.
+- Treat it like a password: never paste it into code or commit it.
+- On Windows, Git Credential Manager may instead open a browser window to sign in. Either works.
+
+## Restoring an accidentally deleted file
+
+:::: columns
+::: {.column width="48%"}
+**Not yet committed**
+
+- RStudio: Git pane → select the deleted file → *Revert*
+- Positron: Source Control → *Discard Changes*
+- Terminal: `git restore path/to/file`
+:::
+::: {.column width="48%"}
+**Deleted in an earlier commit**
+
+Find the commit that deleted it, then restore the file from the commit before:
+
+```
+git log --oneline -- file
+git restore --source <id>~1 file
+```
+:::
+::::
+
+## Committed something sensitive?
+
+1. **Stop.** Don't try to fix it quietly.
+2. If it was pushed, treat it as published: tell your manager or data custodian.
+3. Rotate any exposed passwords or tokens immediately.
+4. Removing it from history needs `git filter-repo` and a force-push. Ask for help; it affects everyone with a copy.
+
+\bigskip
+Prevention is easier: `.gitignore`, read the diff, keep data outside the repo.

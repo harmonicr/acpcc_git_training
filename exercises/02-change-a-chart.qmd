@@ -1,0 +1,63 @@
+---
+title: "Exercise 2: Change a chart"
+description: "Edit R code on a branch and watch the CI check."
+---
+
+**Goal**: change how a chart looks, see the diff, and watch GitHub Actions render your change.
+
+::: {.callout-note}
+These pull requests are for practice and **won't be merged**: if everyone changed the same line, they would conflict.
+:::
+
+## 1. Start a new branch from `main`
+
+Make sure you're on `main` and have pulled (Exercise 1, step 7). Then create a branch called `alex/chart-style`, the same way as in Exercise 1, step 2.
+
+## 2. Make the change
+
+Open `R/charts.R` and find `chart_compare()`. Near the end of it, the dashed **Victoria** reference line is drawn by:
+
+```r
+  e <- e_line(e, Victoria,
+    name = "Victoria",
+    symbol = "none",
+    lineStyle = list(type = "dashed", color = pal$ink, width = 1.5),
+```
+
+Change it. For example, make it dotted, thicker and dark blue:
+
+```r
+    lineStyle = list(type = "dotted", color = pal$blue_dark, width = 3),
+```
+
+Save the file.
+
+## 3. Check it works locally
+
+In the **Terminal** tab:
+
+```bash
+quarto render bowel-cancer.qmd
+```
+
+Open `_site/bowel-cancer.html` and look at the Compare view.
+
+## 4. Review the diff, then commit and push
+
+Open the diff (**Diff** in RStudio's Git pane, or click the file in Positron's Source Control). One line should be red (removed) and one green (added). If anything else changed, find out why before committing.
+
+Commit with a message that says **why**, e.g. `Make Victoria reference line easier to see`, then push. The steps are the same as Exercise 1, steps 4 and 5.
+
+Notice that only `R/charts.R` changed. The rendered `_site/` folder is ignored by Git (see `.gitignore`), because GitHub Actions rebuilds it.
+
+## 5. Open a pull request and watch the check
+
+1. Open a pull request on GitHub as in Exercise 1.
+2. Select **Details** next to the **render** check to watch the log as it runs: restore packages, build the data, render the site.
+3. When it finishes, scroll to the bottom of the run summary. The **site-preview** artifact is a zip of the rendered site with your change.
+
+## Stretch: break it on purpose
+
+Break the code: delete the closing `)` at the end of the `lineStyle = list(...)` line, then commit and push to the same branch. The check turns red. Open the log to find the error, fix the typo, commit and push again. The check reruns automatically.
+
+This is what branch protection is for: a pull request with a red check can't be merged into `main`.

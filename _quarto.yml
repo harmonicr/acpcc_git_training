@@ -10,9 +10,11 @@ project:
     - breast-cancer.qmd
     - cervical-cancer.qmd
     - instructions.qmd
+    - exercises/*.qmd
+    - exercises/attendees/*.qmd
+    - slides/git-foundations.qmd
   resources:
     - downloads/
-    - assets/acpcc.js
 
 website:
   title: "Victorian Cancer Screening Statistical Report"
@@ -31,6 +33,19 @@ website:
       - breast-cancer.qmd
       - cervical-cancer.qmd
       - instructions.qmd
+      - section: "Git training"
+        contents:
+          - text: "Slides (PDF)"
+            href: slides/git-foundations.qmd
+          - exercises/index.qmd
+          - exercises/00-setup.qmd
+          - exercises/01-first-pull-request.qmd
+          - exercises/02-change-a-chart.qmd
+          - exercises/03-sql-diff.qmd
+          - exercises/04-committed-data.qmd
+          - exercises/05-revert.qmd
+          - exercises/cheatsheet.qmd
+          - exercises/attendees.qmd
     tools:
       - icon: box-arrow-up-right
         href: https://www.acpcc.org.au/
@@ -46,8 +61,7 @@ format:
     toc: false
     title-block-style: none
     include-before-body: assets/banner.html
-    include-after-body:
-      text: <script src="assets/acpcc.js"></script>
+    include-after-body: assets/behaviour.html
     link-external-newwindow: true
     smooth-scroll: true
 

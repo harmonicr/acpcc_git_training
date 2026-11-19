@@ -1,0 +1,4 @@
+---
+title: "Example Person"
+description: "Copy this file, rename it to your first name, and change these two lines."
+---
