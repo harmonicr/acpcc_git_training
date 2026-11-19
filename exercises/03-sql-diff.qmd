@@ -57,7 +57,7 @@ If you want to keep the change, commit and push it as in Exercise 1. Otherwise t
 ::: {.panel-tabset group="ide"}
 ## RStudio
 
-Git pane → right-click `sql/data_table.sql` → **Revert...** → **Yes**.
+Git pane → select `sql/data_table.sql` → **More** (gear icon) → **Revert...** → **Yes**.
 
 ## Positron
 

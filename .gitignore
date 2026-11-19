@@ -21,7 +21,7 @@
 /.quarto/
 /_site/
 *_files/
-*.quarto_ipynb
+**/*.quarto_ipynb
 *.html
 *.pdf
 !assets/**/*.html
@@ -37,5 +37,3 @@ data/*.duckdb.wal
 # --- OS clutter -------------------------------------------------------------
 .DS_Store
 Thumbs.db
-
-**/*.quarto_ipynb

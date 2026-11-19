@@ -340,7 +340,7 @@ Participation peaks among people aged 70-74.
 
 | I want to... | RStudio | Positron | Terminal |
 |---|---|---|---|
-| Throw away unsaved edits to a file | Git pane → right-click → *Revert* | Source Control → *Discard Changes* | `git restore file` |
+| Throw away unsaved edits to a file | Git pane → *More* → *Revert* | Source Control → *Discard Changes* | `git restore file` |
 | Unstage a file | Untick *Staged* | **−** next to the file | `git restore --staged file` |
 | Fix the last commit message (before pushing) | Tick *Amend previous commit* | *Commit (Amend)* in the *...* menu | `git commit --amend` |
 | Undo a pushed commit | Terminal | Terminal | `git revert <commit>` |
@@ -440,7 +440,7 @@ gitcreds::gitcreds_set()
 ::: {.column width="48%"}
 **Not yet committed**
 
-- RStudio: Git pane → select the deleted file → *Revert*
+- RStudio: Git pane → select the file → *More* → *Revert*
 - Positron: Source Control → *Discard Changes*
 - Terminal: `git restore path/to/file`
 :::

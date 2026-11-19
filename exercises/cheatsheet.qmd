@@ -15,7 +15,7 @@ description: "Git in RStudio, Positron and the terminal."
 | Commit | **Commit** → message → **Commit** | Message box → **Commit** | `git commit -m "message"` |
 | Push a new branch | **Push** | **Publish Branch** | `git push -u origin name` |
 | Push / pull | **Push** / **Pull** arrows | **Sync Changes** | `git push`, `git pull` |
-| Discard edits to a file | Right-click → **Revert...** | **Discard Changes** | `git restore file` |
+| Discard edits to a file | **More** → **Revert...** | **Discard Changes** | `git restore file` |
 | Fix the last commit (not pushed) | Tick **Amend previous commit** | **...** → **Commit** → **Commit (Amend)** | `git commit --amend` |
 | Undo a pushed commit | Terminal | Terminal | `git revert <id>` |
 | History | **History** (clock icon) | Source Control Graph | `git log --oneline` |
